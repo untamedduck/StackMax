@@ -1,0 +1,57 @@
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
+import java.util.Stack;
+
+/**
+ * 
+ * @author Jared Lee
+ *         <p>
+ *         output: How many queries: 3 push 6 push 2 max 6
+ *
+ */
+
+public class StackWithMaxNaive {
+
+	@SuppressWarnings("resource")
+	static public void main(String[] args) throws IOException {
+
+		Scanner scan = new Scanner(System.in);
+		System.out.println("How many queries: ");
+		int queries = scan.nextInt();
+		// creating a stack to store integers
+		Stack<Integer> stack = new Stack<Integer>();
+		Stack<Integer> Maxstack = new Stack<Integer>();
+		ArrayList<Integer> maxVal = new ArrayList<Integer>();
+
+		for (int qi = 0; qi < queries; ++qi) {
+			String operation = scan.next();
+			if ("push".equals(operation)) {
+				int value = scan.nextInt();
+				stack.push(value);
+				while (Maxstack.isEmpty()) { // push value to Maxstack while Maxstack is empty
+					Maxstack.push(value);
+				}
+				if (value >= Collections.max(Maxstack)) { // if user value is greater than the max value in Maxstack,
+															// push value to max stack
+					Maxstack.push(value);
+				}
+
+			} else if ("pop".equals(operation)) {
+				if (Maxstack.peek() == stack.peek()) {
+					Maxstack.pop();
+				}
+				stack.pop();
+
+			} else if ("max".equals(operation)) {
+				maxVal.add(Collections.max(Maxstack));
+
+			}
+
+		}
+		System.out.println("max" + maxVal);
+	}
+
+}
