@@ -21,9 +21,10 @@ public class StackWithMaxNaive {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("How many queries: ");
 		int queries = scan.nextInt();
-		// creating a stack to store integers
+		// creating stacks to store integers
 		Stack<Integer> stack = new Stack<Integer>();
 		Stack<Integer> Maxstack = new Stack<Integer>();
+		// array list to store max values
 		ArrayList<Integer> maxVal = new ArrayList<Integer>();
 
 		for (int qi = 0; qi < queries; ++qi) {
@@ -40,18 +41,20 @@ public class StackWithMaxNaive {
 				}
 
 			} else if ("pop".equals(operation)) {
-				if (Maxstack.peek() == stack.peek()) {
+				if (Maxstack.peek() == stack.peek()) { // only pop Maxstack if the top value in MaxStack is the same as
+														// the top value in stack
 					Maxstack.pop();
 				}
 				stack.pop();
 
 			} else if ("max".equals(operation)) {
-				maxVal.add(Collections.max(Maxstack));
+				maxVal.add(Collections.max(Maxstack)); // add the max value in MaxStack to maxVal array list when user
+														// enters Max
 
 			}
 
 		}
-		System.out.println("max" + maxVal);
+		System.out.println("max" + maxVal); // print the maxVal array list
 	}
 
 }
